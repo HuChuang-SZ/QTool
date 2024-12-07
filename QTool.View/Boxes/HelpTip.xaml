@@ -1,0 +1,163 @@
+﻿<Window x:Class="QTool.View.HelpTip"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="帮助 - QTool"
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Top="{Binding Path=WindowRect.Top,Mode=OneWay}"
+        Left="{Binding Path=WindowRect.Left,Mode=OneWay}"
+        Height="{Binding Path=WindowRect.Height,Mode=OneWay}"
+        Width="{Binding Path=WindowRect.Width,Mode=OneWay}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding Path=HighlightRect.Left,Mode=OneWay}" />
+            <ColumnDefinition Width="{Binding Path=HighlightRect.Width,Mode=OneWay}" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding Path=HighlightRect.Top,Mode=OneWay}" />
+            <RowDefinition Height="{Binding Path=HighlightRect.Height,Mode=OneWay}" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Grid.ColumnSpan="3"
+                Grid.Row="0"
+                Style="{StaticResource cover-bd}"></Border>
+
+        <Border Grid.Column="0"
+                Grid.Row="1"
+                Style="{StaticResource cover-bd}"></Border>
+
+        <Border Grid.Column="2"
+                Grid.Row="1"
+                Style="{StaticResource cover-bd}"></Border>
+
+        <Border Grid.ColumnSpan="3"
+                Grid.Row="2"
+                Style="{StaticResource cover-bd}"></Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                Style="{StaticResource cover-bd}"
+                Opacity="0.01">
+
+        </Border>
+
+        <Canvas Grid.ColumnSpan="3"
+                Grid.RowSpan="3">
+            <Border Canvas.Left="{Binding Path=TipLocation.X,Mode=OneWay}"
+                    Canvas.Top="{Binding Path=TipLocation.Y,Mode=OneWay}"
+                    Height="{Binding Path=TipSize.Height,Mode=OneWay}"
+                    Width="{Binding Path=TipSize.Width,Mode=OneWay}"
+                    Background="{StaticResource color-primary}"
+                    TextBlock.Foreground="{StaticResource color-white}"
+                    CornerRadius="6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Grid.ColumnSpan="3"
+                               Margin="16,0"
+                               VerticalAlignment="Bottom"
+                               FontSize="16"
+                               Text="{Binding Path=CurrentStep.Title}" />
+
+                    <Button Style="{StaticResource btn-icon}"
+                            Foreground="{StaticResource color-white}"
+                            Grid.ColumnSpan="3"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Click="Close_Click"
+                            Margin="16,0"
+                            Content="&#xe64f;" />
+
+
+
+                    <TextBlock Grid.Row="1"
+                               Grid.ColumnSpan="3"
+                               Margin="16"
+                               FontSize="14"
+                               TextWrapping="Wrap"
+                               Text="{Binding Path=CurrentStep.Content}" />
+
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="2"
+                               Margin="16,0,0,16"
+                               VerticalAlignment="Center">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="第 {0}/{1} 步">
+                                <Binding Path="CurrentIndex" />
+                                <Binding Path="Steps.Count" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+
+                    <Button Grid.Column="1"
+                            Grid.Row="2"
+                            Visibility="{Binding Path=CanPrev,Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Content="上一步(_P)"
+                            Click="Prev_Click"
+                            Width="80"
+                            Margin="0,0,16,16">
+                        <Button.Style>
+                            <Style TargetType="Button"
+                                   BasedOn="{StaticResource {x:Type Button}}">
+                                <Setter Property="Foreground"
+                                        Value="{StaticResource color-white}" />
+                                <Setter Property="Background"
+                                        Value="Transparent" />
+                                <Setter Property="BorderBrush"
+                                        Value="{StaticResource color-white}" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource color-white}" />
+                                        <Setter Property="Background"
+                                                Value="{StaticResource color-primary-3}" />
+                                        <Setter Property="BorderBrush"
+                                                Value="{StaticResource color-white}" />
+                                    </Trigger>
+                                    <Trigger Property="IsFocused"
+                                             Value="True">
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource color-white}" />
+                                        <Setter Property="Background"
+                                                Value="{StaticResource color-primary-3}" />
+                                        <Setter Property="BorderBrush"
+                                                Value="{StaticResource color-white}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Grid.Column="2"
+                            Grid.Row="2"
+                            IsDefault="True"
+                            Width="80"
+                            Content="{Binding Path=NextText}"
+                            Click="Next_Click"
+                            Margin="0,0,16,16">
+                    </Button>
+                </Grid>
+            </Border>
+        </Canvas>
+    </Grid>
+
+</Window>

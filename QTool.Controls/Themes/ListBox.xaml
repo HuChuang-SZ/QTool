@@ -1,0 +1,634 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/QTool.Controls;component/Themes/Color.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <Style x:Key="ListBoxItemNavStyle"
+           TargetType="ListBoxItem">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Width"
+                Value="44" />
+        <Setter Property="Height"
+                Value="44" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="Foreground"
+                Value="{StaticResource color-text-primary}" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="Margin"
+                Value="0,0,0,1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            CornerRadius="3"
+                            Padding="2">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-primary}" />
+                            <Setter Property="Background"
+                                    Value="{StaticResource color-white}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource color-primary}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-primary}" />
+                            <Setter Property="Background"
+                                    Value="{StaticResource color-white}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource color-primary}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxNavStyle"
+           TargetType="ListBox">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Background"
+                Value="{StaticResource background-color-base}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource border-color-base}" />
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource ListBoxItemNavStyle}" />
+        <Setter Property="Padding"
+                Value="2,6" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto"
+                                      CanContentScroll="True"
+                                      VirtualizingPanel.VirtualizationMode="Standard"
+                                      VirtualizingPanel.IsVirtualizing="True">
+                            <ItemsPresenter Margin="{TemplateBinding Padding}" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="ListBoxItemImageStyle"
+           TargetType="ListBoxItem">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="2" />
+        <Setter Property="Foreground"
+                Value="{StaticResource color-text-primary}" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="Margin"
+                Value="3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            CornerRadius="3"
+                            Padding="2">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-primary}" />
+                            <Setter Property="Background"
+                                    Value="{StaticResource color-white}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource color-primary}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-primary}" />
+                            <Setter Property="Background"
+                                    Value="{StaticResource color-white}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource color-primary}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxImageStyle"
+           TargetType="ListBox">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Background"
+                Value="{StaticResource color-white}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource border-color-base}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource ListBoxItemImageStyle}" />
+        <Setter Property="Padding"
+                Value="6" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto"
+                                      CanContentScroll="True"
+                                      VirtualizingPanel.VirtualizationMode="Standard"
+                                      VirtualizingPanel.IsVirtualizing="True">
+                            <ItemsPresenter Margin="{TemplateBinding Padding}" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxItemSearchStyle"
+           TargetType="ListBoxItem">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="MinHeight"
+                Value="22" />
+        <Setter Property="Padding"
+                Value="8,0" />
+        <Setter Property="Foreground"
+                Value="{StaticResource color-text-regular}" />
+        <Setter Property="Margin"
+                Value="0,0,8,8" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource border-color-base}" />
+        <Setter Property="Background"
+                Value="{StaticResource background-color-lighter}" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <Path Width="18"
+                              Height="18"
+                              Visibility="{TemplateBinding Converter={StaticResource BooleanToVisibilityConverter},Property=IsSelected}"
+                              Fill="{TemplateBinding BorderBrush}"
+                              VerticalAlignment="Bottom"
+                              HorizontalAlignment="Right">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathGeometry.Figures>
+                                        <PathFigureCollection>
+                                            <PathFigure IsClosed="True"
+                                                        StartPoint="0,18">
+                                                <PathFigure.Segments>
+                                                    <PathSegmentCollection>
+                                                        <LineSegment Point="18,18" />
+                                                        <LineSegment Point="18,0" />
+                                                    </PathSegmentCollection>
+                                                </PathFigure.Segments>
+                                            </PathFigure>
+                                        </PathFigureCollection>
+                                    </PathGeometry.Figures>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <TextBlock FontFamily="{StaticResource QTool-IconFont}"
+                                   Visibility="{TemplateBinding Converter={StaticResource BooleanToVisibilityConverter},Property=IsSelected}"
+                                   Foreground="{TemplateBinding Background}"
+                                   Margin="2"
+                                   FontSize="6"
+                                   Text="&#xe709;"
+                                   VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Right" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource color-primary}" />
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-primary}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource background-color-info}" />
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-text-placeholder}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxSearchStyle"
+           TargetType="{x:Type ListBox}">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource ListBoxItemSearchStyle}" />
+    </Style>
+
+    <Style x:Key="ListBoxItemTabStyle"
+           TargetType="ListBoxItem">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Height"
+                Value="40" />
+        <Setter Property="Foreground"
+                Value="{StaticResource color-text-regular}" />
+        <Setter Property="Padding"
+                Value="12,8" />
+        <Setter Property="Margin"
+                Value="0,0,0,-1" />
+        <Setter Property="BorderThickness"
+                Value="0,0,0,2" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource color-primary}" />
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-primary}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxTabStyle"
+           TargetType="{x:Type ListBox}">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource border-color-base}" />
+        <Setter Property="BorderThickness"
+                Value="0,0,0,1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            Padding="{TemplateBinding Padding}">
+                        <ItemsPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource ListBoxItemTabStyle}" />
+    </Style>
+
+    <Style x:Key="ListBoxItemRadioStyle"
+           TargetType="ListBoxItem">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Foreground"
+                Value="{StaticResource color-text-regular}" />
+        <Setter Property="Margin"
+                Value="0,3,20,3" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource border-color-base}" />
+        <Setter Property="Background"
+                Value="{StaticResource background-color-lighter}" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <RadioButton Content="{TemplateBinding Content}"
+                                 ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                 ContentTemplate="{TemplateBinding ContentTemplate}"
+                                 ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                 IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
+                                 IsEnabled="{TemplateBinding IsEnabled}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxRadioStyle"
+           TargetType="{x:Type ListBox}">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource ListBoxItemRadioStyle}" />
+    </Style>
+
+    <Style x:Key="ListBoxVerticalRadioStyle"
+           BasedOn="{StaticResource ListBoxRadioStyle}"
+           TargetType="{x:Type ListBox}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxItemCheckStyle"
+           TargetType="ListBoxItem">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Foreground"
+                Value="{StaticResource color-text-regular}" />
+        <Setter Property="Margin"
+                Value="0,3,5,3" />
+        <Setter Property="MinWidth"
+                Value="95" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource border-color-base}" />
+        <Setter Property="Background"
+                Value="{StaticResource background-color-lighter}" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <CheckBox Content="{TemplateBinding Content}"
+                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                              IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
+                              IsEnabled="{TemplateBinding IsEnabled}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxCheckStyle"
+           TargetType="{x:Type ListBox}">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="SelectionMode"
+                Value="Multiple" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource ListBoxItemCheckStyle}" />
+    </Style>
+
+    <Style x:Key="ListBoxItemGroupStyle"
+           TargetType="ListBoxItem">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Foreground"
+                Value="{StaticResource color-text-regular}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource border-color-base}" />
+        <Setter Property="Background"
+                Value="{StaticResource color-white}" />
+        <Setter Property="Padding"
+                Value="8,6" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-primary}" />
+                            <Setter Property="Background"
+                                    Value="{StaticResource color-primary-9}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource color-primary-7}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-white}" />
+                            <Setter Property="Background"
+                                    Value="{StaticResource color-primary}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource color-primary}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxGroupStyle"
+           TargetType="{x:Type ListBox}">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ItemsPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource ListBoxItemGroupStyle}" />
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,51 @@
+﻿<Window x:Class="QTool.Controls.QMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        AllowsTransparency="True"
+        ShowInTaskbar="False"
+        Topmost="True"
+        WindowStyle="None"
+        mc:Ignorable="d"
+        Title="提示"
+        SizeToContent="Height"
+        Width="500">
+
+    <Border x:Name="border"
+            BorderBrush="#fde2e2"
+            BorderThickness="1"
+            Background="#fef0f0"
+            Padding="10,10,10,10"
+            CornerRadius="4">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <!--<ColumnDefinition Width="Auto" />-->
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <!--<TextBlock Grid.Column="0"
+                       Foreground="{StaticResource color-danger}"
+                       FontSize="18"
+                       VerticalAlignment="Center"
+                       Text="&#xe7c4;"
+                       FontFamily="{StaticResource QTool-IconFont}" />-->
+
+            <TextBlock x:Name="txtContent"
+                       Grid.Column="0"
+                       Margin="10,0"
+                       Foreground="{StaticResource color-danger}"
+                       VerticalAlignment="Top"
+                       TextWrapping="Wrap"
+                       FontSize="14px" />
+
+            <Button Grid.Column="1"
+                    Style="{StaticResource btn-icon}"
+                    FontFamily="{StaticResource QTool-IconFont}"
+                    FontSize="10"
+                    VerticalAlignment="Top"
+                    Click="Close_Click"
+                    Content="&#xe64f;" />
+        </Grid>
+    </Border>
+</Window>

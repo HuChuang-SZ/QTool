@@ -1,0 +1,8 @@
+﻿{
+  "profiles": {
+    "QTool.View": {
+      "commandName": "Project",
+      "commandLineArgs": "not-upgrade"
+    }
+  }
+}

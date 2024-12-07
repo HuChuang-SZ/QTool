@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:QTool.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/QTool.Controls;component/Themes/Color.xaml" />
+        <ResourceDictionary Source="/QTool.Controls;component/Themes/Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type c:QShadeContentControl}">
+        <Setter Property="Padding"
+                Value="8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:QShadeContentControl}">
+                    <Grid>
+                        <Border x:Name="PART_ShadeBd"
+                                Background="#33000000" />
+
+                        <Border x:Name="PART_ContentBd"
+                                Background="{StaticResource color-white}"
+                                BorderBrush="{StaticResource border-color-base}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                CornerRadius="6">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           FontSize="16"
+                                           Visibility="{TemplateBinding Converter={StaticResource StringToVisibilityConverter},Property=Title}"
+                                           Text="{TemplateBinding Title}"
+                                           Margin="8,8,8,0"
+                                           HorizontalAlignment="Left" />
+
+                                <ContentPresenter Grid.Row="1"
+                                                  Margin="{TemplateBinding Padding}" />
+
+                                <Button x:Name="PART_CloseBtn"
+                                        Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CanCloseBtn,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Style="{StaticResource btn-icon2}"
+                                        IsCancel="True"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Margin="4"
+                                        FontSize="18"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Content="&#xe6a7;" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasContent"
+                                 Value="False">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

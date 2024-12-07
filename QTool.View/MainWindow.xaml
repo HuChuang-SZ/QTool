@@ -1,0 +1,285 @@
+﻿<c:QWindow  x:Class="QTool.View.MainWindow"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:c="http://wpf.qtool.com.cn/Controls"
+            xmlns:cc="http://wpf.qtool.com.cn/Controls/Converters"
+            xmlns:controls="clr-namespace:QTool.View.Controls"
+            xmlns:viewModels="clr-namespace:QTool.View.ViewModels"
+            d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+            Title="QTool - IM工作台"
+            mc:Ignorable="d"
+            WindowStartupLocation="CenterScreen"
+            MinHeight="740"
+            MinWidth="1280"
+            Height="740"
+            Width="1280">
+    <c:QWindow.CommandBindings>
+        <CommandBinding Command="{x:Static c:QCommands.RefreshTab}"
+                        CanExecute="Tab_CanExceute"
+                        Executed="RefreshTab_Executed" />
+        <CommandBinding Command="{x:Static c:QCommands.CopyTab}"
+                        CanExecute="Tab_CanExceute"
+                        Executed="CopyTab_Executed" />
+        <CommandBinding Command="{x:Static c:QCommands.CloseTab}"
+                        CanExecute="Tab_CanExceute"
+                        Executed="CloseTab_Executed" />
+        <CommandBinding Command="{x:Static c:QCommands.CloseOtherTabs}"
+                        CanExecute="Tab_CanExceute"
+                        Executed="CloseOtherTabs_Executed" />
+        <CommandBinding Command="{x:Static c:QCommands.CloseOffsideTabs}"
+                        CanExecute="Tab_CanExceute"
+                        Executed="CloseOffsideTabs_Executed" />
+    </c:QWindow.CommandBindings>
+    <c:QWindow.Resources>
+        <cc:NumberToBooleanConverter x:Key="LessThanNumberToBooleanConverter"
+                                     Mode="LessThan" />
+        <controls:ContentTemplateSelector x:Key="ContentTemplateSelector" />
+    </c:QWindow.Resources>
+    <c:QWindow.Header>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Column="0"
+                       Width="24"
+                       Height="24"
+                       Margin="8"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{x:Static c:AppHelper.Icon}" />
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <c:TabListBox x:Name="eTab"
+                          Margin="26,6,6,0"
+                          Grid.Column="1"
+                          ItemsSource="{Binding Path=CurrentContent.Tabs}"
+                          SelectedItem="{Binding Path=CurrentContent.Content,Mode=TwoWay}">
+                <c:TabListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}"
+                           BasedOn="{StaticResource TabListBoxItemStyle}">
+                        <Setter Property="ContextMenu">
+                            <Setter.Value>
+                                <ContextMenu>
+                                    <MenuItem Header="刷新"
+                                              Command="{x:Static c:QCommands.RefreshTab}"
+                                              CommandParameter="{Binding}" />
+                                    <MenuItem Header="复制标签页"
+                                              Command="{x:Static c:QCommands.CopyTab}"
+                                              CommandParameter="{Binding}" />
+                                    <Separator />
+                                    <MenuItem Header="关闭标签页"
+                                              Command="{x:Static c:QCommands.CloseTab}"
+                                              CommandParameter="{Binding}" />
+                                    <MenuItem Header="关闭其他标签页"
+                                              Command="{x:Static c:QCommands.CloseOtherTabs}"
+                                              CommandParameter="{Binding}" />
+                                    <MenuItem Header="关闭右侧标签页"
+                                              Command="{x:Static c:QCommands.CloseOffsideTabs}"
+                                              CommandParameter="{Binding}" />
+                                </ContextMenu>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </c:TabListBox.ItemContainerStyle>
+                <c:TabListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="Transparent">
+                            <Border.ToolTip>
+                                <TextBlock>
+                    <Run Text="{Binding Path=Title,Mode=OneWay}" />
+                    <LineBreak />
+                    <Run Text="{Binding Path=Address,Mode=OneWay}" />
+                                </TextBlock>
+                            </Border.ToolTip>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image x:Name="icon"
+                                       Grid.Column="0"
+                                       Margin="6,0,0,0"
+                                       Width="16"
+                                       Height="16"
+                                       Source="{Binding Path=Owner.Icon}"
+                                       VerticalAlignment="Center" />
+
+                                <TextBlock x:Name="title"
+                                           Grid.Column="1"
+                                           Margin="6,0"
+                                           VerticalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis"
+                                           Text="{Binding Path=Title}" />
+                                <Button x:Name="btnClose"
+                                        Grid.Column="2"
+                                        Margin="0,0,6,0"
+                                        WindowChrome.IsHitTestVisibleInChrome="True"
+                                        Style="{StaticResource btn-nav2}"
+                                        Command="{x:Static c:QCommands.CloseTab}"
+                                        CommandParameter="{Binding}"
+                                        FontSize="8"
+                                        VerticalAlignment="Center"
+                                        FontFamily="{StaticResource QTool-IconFont}"
+                                        Content="&#xe64f;" />
+                            </Grid>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Width,Converter={StaticResource LessThanNumberToBooleanConverter}, ConverterParameter=80}"
+                                         Value="True">
+                                <Setter TargetName="btnClose"
+                                        Property="Visibility"
+                                        Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Width,Converter={StaticResource LessThanNumberToBooleanConverter}, ConverterParameter=30}"
+                                         Value="True">
+                                <Setter TargetName="icon"
+                                        Property="Visibility"
+                                        Value="Collapsed" />
+                                <Setter TargetName="title"
+                                        Property="VerticalAlignment"
+                                        Value="Center" />
+                            </DataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Width,Converter={StaticResource LessThanNumberToBooleanConverter}, ConverterParameter=80}"
+                                               Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsMouseOver}"
+                                               Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="btnClose"
+                                        Property="Visibility"
+                                        Value="Visible" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Width,Converter={StaticResource LessThanNumberToBooleanConverter}, ConverterParameter=50}"
+                                               Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsMouseOver}"
+                                               Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="icon"
+                                        Property="Visibility"
+                                        Value="Collapsed" />
+                                <Setter TargetName="btnClose"
+                                        Property="Visibility"
+                                        Value="Visible" />
+                            </MultiDataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </c:TabListBox.ItemTemplate>
+            </c:TabListBox>
+
+            <controls:ModuleBox x:Name="eModule"
+                           Grid.Column="2"
+                           Visibility="Collapsed"
+                           WindowChrome.IsHitTestVisibleInChrome="True"
+                           VerticalAlignment="Center"
+                           Content="{Binding Path=CurrentModule,Mode=TwoWay}"
+                           Margin="6,0" />
+        </Grid>
+    </c:QWindow.Header>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="eShop"
+                 Grid.Column="0"
+                 Margin="0,0,0,0"
+                 WindowChrome.IsHitTestVisibleInChrome="True"
+                 Style="{StaticResource ListBoxNavStyle}"
+                 BorderThickness="0,0,1,0"
+                 BorderBrush="{StaticResource border-color-base}"
+                 ItemsSource="{Binding Path=Shops}"
+                 SelectedItem="{Binding Path=CurrentShop,Mode=TwoWay}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem"
+                       BasedOn="{StaticResource ListBoxItemNavStyle}">
+                    <Setter Property="ToolTip"
+                            Value="{Binding FullName}" />
+                    <Setter Property="ToolTipService.InitialShowDelay"
+                            Value="50" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=HasError}"
+                                     Value="True">
+                            <Setter Property="ToolTip"
+                                    Value="{Binding Path=Error.Message}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid SnapsToDevicePixels="True">
+                        <TextBlock x:Name="tb"
+                                   Text="{Binding Path=DisplayName}"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   TextTrimming="CharacterEllipsis"
+                                   TextWrapping="Wrap" />
+                        <Border x:Name="unread"
+                                Margin="0,-11,-11,0"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"
+                                Height="18"
+                                Width="18">
+                            <Grid>
+                                <Ellipse x:Name="unreadBack"
+                                         Stroke="{StaticResource color-white}"
+                                         StrokeThickness="1"
+                                         Fill="{StaticResource color-primary}" />
+                                <TextBlock x:Name="unreadText"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           FontSize="11"
+                                           FontWeight="Bold"
+                                           Foreground="{StaticResource color-white}"
+                                           Text="{Binding Path=Unread}" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=Unread}"
+                                     Value="0">
+                            <Setter TargetName="unread"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=HasError}"
+                                     Value="True">
+                            <Setter TargetName="unread"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            <Setter TargetName="unreadBack"
+                                    Property="Fill"
+                                    Value="{StaticResource color-danger}" />
+                            <Setter TargetName="unreadText"
+                                    Property="Text"
+                                    Value="未" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ContentControl Grid.Column="1"
+                        Content="{Binding Path=CurrentContent}"
+                        ContentTemplateSelector="{StaticResource ContentTemplateSelector}" />
+
+        <c:ProgressBar Grid.Column="1"
+                       IsShow="{Binding Path=CurrentContent.IsWaiting,Mode=OneWay}"
+                       Message="{Binding Path=CurrentContent.WaitMsg,Mode=OneWay}" />
+    </Grid>
+</c:QWindow>

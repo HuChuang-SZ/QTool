@@ -1,0 +1,592 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:QTool.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/QTool.Controls;component/Themes/Color.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="{x:Static GridView.GridViewScrollViewerStyleKey}"
+           TargetType="ScrollViewer">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollViewer">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <DockPanel Margin="{TemplateBinding Padding}">
+                            <ScrollViewer DockPanel.Dock="Top"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"
+                                          Focusable="false">
+                                <GridViewHeaderRowPresenter Columns="{Binding Path=TemplatedParent.View.Columns,RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderContainerStyle="{Binding Path=TemplatedParent.View.ColumnHeaderContainerStyle,RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderTemplate="{Binding Path=TemplatedParent.View.ColumnHeaderTemplate,RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderTemplateSelector="{Binding Path=TemplatedParent.View.ColumnHeaderTemplateSelector,RelativeSource={RelativeSource TemplatedParent}}"
+                                                            AllowsColumnReorder="{Binding Path=TemplatedParent.View.AllowsColumnReorder,RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderContextMenu="{Binding Path=TemplatedParent.View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderToolTip="{Binding Path=TemplatedParent.View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </ScrollViewer>
+
+                            <ScrollContentPresenter Name="PART_ScrollContentPresenter"
+                                                    KeyboardNavigation.DirectionalNavigation="Local"
+                                                    CanContentScroll="True"
+                                                    CanHorizontallyScroll="False"
+                                                    CanVerticallyScroll="False" />
+                        </DockPanel>
+
+                        <ScrollBar Name="PART_HorizontalScrollBar"
+                                   Orientation="Horizontal"
+                                   Grid.Row="1"
+                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                   Value="{TemplateBinding HorizontalOffset}"
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+
+                        <ScrollBar Name="PART_VerticalScrollBar"
+                                   Grid.Column="1"
+                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Value="{TemplateBinding VerticalOffset}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="GridViewColumnHeaderGripper"
+           TargetType="Thumb">
+        <Setter Property="Width"
+                Value="3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border Padding="{TemplateBinding Padding}"
+                            Background="Transparent">
+                        <Rectangle HorizontalAlignment="Center"
+                                   Width="1"
+                                   Fill="{StaticResource border-color-base}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToggleButtonFitlerStyle"
+           TargetType="ToggleButton">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource QTool-IconFont}" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="0,0,1,0" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxItemFitlerStyle"
+           TargetType="ListBoxItem">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Foreground"
+                Value="{StaticResource color-text-secondary}" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Column="0"
+                                  Margin="3"
+                                  IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsSelected,Mode=TwoWay}" />
+
+                        <Border Grid.Column="1"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-text-primary}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource color-text-primary}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxFitlerStyle"
+           TargetType="ListBox">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="FontWeight"
+                Value="Normal" />
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="SelectionMode"
+                Value="Extended" />
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource ListBoxItemFitlerStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="20" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Row="0"
+                                          Grid.ColumnSpan="2"
+                                          VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled"
+                                          VirtualizingPanel.IsVirtualizing="True"
+                                          CanContentScroll="True">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                            <TextBlock Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="3,0">
+                                <Run Text="已选：" />
+                                <Run Text="{Binding Path=SelectedItems.Count,RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}" />
+                                <Run Text="/" />
+                                <Run Text="{Binding Path=Items.Count,RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}" />
+                            </TextBlock>
+                            <!--<TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Margin="3,0">
+                                <Hyperlink Command="{x:Static c:QCommands.SelectAll}"
+                                           CommandTarget="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}">全选</Hyperlink>
+                                <Hyperlink Command="{x:Static c:QCommands.Invert}"
+                                           CommandTarget="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}">反选</Hyperlink>
+                            </TextBlock>-->
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type GridViewColumnHeader}"
+           TargetType="GridViewColumnHeader">
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Foreground"
+                Value="{StaticResource color-info}" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource border-color-base}" />
+        <Setter Property="FontWeight"
+                Value="Bold" />
+        <Setter Property="Padding"
+                Value="8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridViewColumnHeader">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="HeaderBorder"
+                                Grid.Column="0"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter x:Name="HeaderContent"
+                                              Margin="0,0,0,1"
+                                              RecognizesAccessKey="True"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+
+                        <TextBlock Name="SortDirectionDisplay"
+                                   Grid.Column="0"
+                                   FontFamily="{StaticResource QTool-IconFont}"
+                                   FontWeight="Normal"
+                                   Margin="0,-3,0,0"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Center" />
+
+                        <ToggleButton Name="FilterButton"
+                                      Grid.Column="1"
+                                      Width="20"
+                                      FontWeight="Bold"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="1,0,0,1"
+                                      Style="{StaticResource ToggleButtonFitlerStyle}"
+                                      Content="&#xe709;"
+                                      IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Column.IsShowFilter,Mode=TwoWay}" />
+
+                        <c:QPopup Placement="Bottom"
+                                  VerticalOffset="1"
+                                  StaysOpen="False"
+                                  PlacementTarget="{Binding ElementName=FilterButton}"
+                                  IsOpen="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Column.IsShowFilter,Mode=TwoWay}">
+                            <Border Name="FilterBd"
+                                    Background="{StaticResource color-white}"
+                                    BorderBrush="{StaticResource border-color-base}"
+                                    BorderThickness="1"
+                                    MaxHeight="302"
+                                    MinWidth="160">
+                                <Grid>
+                                    <ListBox Name="FilterListBox"
+                                             Grid.Row="0"
+                                             MaxWidth="500"
+                                             Style="{StaticResource ListBoxFitlerStyle}"
+                                             ItemsSource="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Column.Filter.Options}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <ContentControl Name="valueContent"
+                                                                    Grid.Column="0"
+                                                                    Content="{Binding Path=Value}"
+                                                                    ContentTemplate="{Binding RelativeSource={RelativeSource AncestorType=GridViewColumnHeader},Path=Column.FilterTemplate}"
+                                                                    Margin="0,0,10,0" />
+                                                    <TextBlock Grid.Column="1"
+                                                               VerticalAlignment="Center"
+                                                               Margin="2,0"
+                                                               Text="{Binding Path=DataCount,StringFormat='({0})'}" />
+                                                </Grid>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=GridViewColumnHeader},Path=Column.FilterTemplate}"
+                                                                 Value="{x:Null}">
+                                                        <Setter TargetName="valueContent"
+                                                                Property="ContentTemplate"
+                                                                Value="{x:Null}" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=Value}"
+                                                                 Value="{x:Null}">
+                                                        <Setter TargetName="valueContent"
+                                                                Property="Content"
+                                                                Value="无" />
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem"
+                                                   BasedOn="{StaticResource ListBoxItemFitlerStyle}">
+                                                <Setter Property="IsSelected"
+                                                        Value="{Binding Path=IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                    </ListBox>
+                                    <Border x:Name="FilterGenerating"
+                                            Visibility="Collapsed"
+                                            Background="{StaticResource color-white}">
+                                        <TextBlock VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Column.Filter.Message}" />
+                                    </Border>
+
+                                    <TextBlock x:Name="FilterGenerated"
+                                               Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Column.Filter.Message}"
+                                               Visibility="Visible"
+                                               Foreground="{StaticResource color-text-placeholder}"
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Bottom"
+                                               FontSize="8"
+                                               Margin="3" />
+                                </Grid>
+                            </Border>
+                        </c:QPopup>
+
+                        <Thumb x:Name="PART_HeaderGripper"
+                               Grid.ColumnSpan="2"
+                               HorizontalAlignment="Right"
+                               Margin="0,0,-1,0"
+                               Style="{StaticResource GridViewColumnHeaderGripper}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Column.Direction}"
+                                     Value="Descending">
+                            <Setter TargetName="SortDirectionDisplay"
+                                    Property="Text"
+                                    Value="&#xe76f;" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Column.Direction}"
+                                     Value="Ascending">
+                            <Setter TargetName="SortDirectionDisplay"
+                                    Property="Text"
+                                    Value="&#xe77b;" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Column.Filter}"
+                                     Value="{x:Null}">
+                            <Setter TargetName="FilterButton"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Column.Filter.Options}"
+                                     Value="{x:Null}">
+                            <Setter TargetName="FilterBd"
+                                    Property="MinHeight"
+                                    Value="120" />
+                            <Setter TargetName="FilterGenerating"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            <Setter TargetName="FilterGenerated"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Column.Filter.IsSelected}"
+                                     Value="False">
+                            <Setter TargetName="FilterButton"
+                                    Property="Content"
+                                    Value="&#xe76f;" />
+                            <Setter TargetName="FilterButton"
+                                    Property="Content"
+                                    Value="&#xe76f;" />
+                            <Setter TargetName="FilterButton"
+                                    Property="FontWeight"
+                                    Value="Normal" />
+                            <Setter TargetName="FilterButton"
+                                    Property="Foreground"
+                                    Value="{StaticResource color-info}" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Role"
+                     Value="Floating">
+                <Setter Property="Opacity"
+                        Value="0.7" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewColumnHeader">
+                            <Canvas Name="PART_FloatingHeaderCanvas">
+                                <Rectangle Fill="#60000000"
+                                           Width="{TemplateBinding ActualWidth}"
+                                           Height="{TemplateBinding ActualHeight}" />
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Role"
+                     Value="Padding">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewColumnHeader">
+                            <Border Name="HeaderBorder"
+                                    BorderBrush="{StaticResource border-color-light}"
+                                    BorderThickness="0,0,0,1">
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="{x:Type ListView}"
+           TargetType="ListView">
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll"
+                Value="true" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListView">
+                    <Border Name="Border"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource border-color-lighter}"
+                            Background="{StaticResource color-white}">
+                        <ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsGrouping"
+                                 Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll"
+                                    Value="False" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter TargetName="Border"
+                                    Property="Background"
+                                    Value="{StaticResource border-color-extra-light}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type ListViewItem}"
+           TargetType="ListViewItem">
+        <Setter Property="SnapsToDevicePixels"
+                Value="true" />
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="Foreground"
+                Value="{StaticResource color-text-regular}" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="Border"
+                            Padding="0,8"
+                            SnapsToDevicePixels="true"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="{StaticResource border-color-light}"
+                            Background="{TemplateBinding Background}">
+                        <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="{StaticResource background-color-lighter}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="{StaticResource background-color-base}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type c:QListView}"
+           TargetType="{x:Type c:QListView}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                Value="Auto" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:QListView}">
+                    <Border Name="Border"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource border-color-lighter}"
+                            Background="{StaticResource color-white}">
+                        <Grid>
+                            <ScrollViewer CanContentScroll="True"
+                                          Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                            <Border x:Name="EmptyItems"
+                                    BorderBrush="{StaticResource border-color-lighter}"
+                                    Visibility="Collapsed"
+                                    Margin="0,32,0,0"
+                                    Padding="16,8"
+                                    BorderThickness="0,0,0,0">
+                                <TextBlock Text="暂无数据"
+                                           Foreground="{StaticResource color-text-placeholder}" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasItems"
+                                 Value="False">
+                            <Setter TargetName="EmptyItems"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter TargetName="Border"
+                                    Property="Background"
+                                    Value="{StaticResource border-color-extra-light}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
