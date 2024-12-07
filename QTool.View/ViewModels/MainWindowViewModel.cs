@@ -1,9 +1,14 @@
-﻿using QTool.View.Contents;
+﻿using QTool.Controls;
+using QTool.View.Contents;
 using QTool.View.Models;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace QTool.View.ViewModels

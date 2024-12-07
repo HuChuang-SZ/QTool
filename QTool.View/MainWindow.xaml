@@ -1,20 +1,20 @@
-﻿<c:QWindow  x:Class="QTool.View.MainWindow"
-            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            xmlns:c="http://wpf.qtool.com.cn/Controls"
-            xmlns:cc="http://wpf.qtool.com.cn/Controls/Converters"
-            xmlns:controls="clr-namespace:QTool.View.Controls"
-            xmlns:viewModels="clr-namespace:QTool.View.ViewModels"
-            d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
-            Title="QTool - IM工作台"
-            mc:Ignorable="d"
-            WindowStartupLocation="CenterScreen"
-            MinHeight="740"
-            MinWidth="1280"
-            Height="740"
-            Width="1280">
+﻿<c:QWindow x:Class="QTool.View.MainWindow"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:c="http://wpf.qtool.com.cn/Controls"
+           xmlns:cc="http://wpf.qtool.com.cn/Controls/Converters"
+           xmlns:vcl="clr-namespace:QTool.View.Controls"
+           xmlns:viewmodels="clr-namespace:QTool.View.ViewModels"
+           d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+           Title="QTool - 速卖通多店铺"
+           mc:Ignorable="d"
+           WindowStartupLocation="CenterScreen"
+           MinHeight="740"
+           MinWidth="1280"
+           Height="740"
+           Width="1280">
     <c:QWindow.CommandBindings>
         <CommandBinding Command="{x:Static c:QCommands.RefreshTab}"
                         CanExecute="Tab_CanExceute"
@@ -35,7 +35,7 @@
     <c:QWindow.Resources>
         <cc:NumberToBooleanConverter x:Key="LessThanNumberToBooleanConverter"
                                      Mode="LessThan" />
-        <controls:ContentTemplateSelector x:Key="ContentTemplateSelector" />
+        <vcl:ContentTemplateSelector x:Key="ContentTemplateSelector" />
     </c:QWindow.Resources>
     <c:QWindow.Header>
         <Grid>
@@ -176,7 +176,7 @@
                 </c:TabListBox.ItemTemplate>
             </c:TabListBox>
 
-            <controls:ModuleBox x:Name="eModule"
+            <vcl:ModuleBox x:Name="eModule"
                            Grid.Column="2"
                            Visibility="Collapsed"
                            WindowChrome.IsHitTestVisibleInChrome="True"

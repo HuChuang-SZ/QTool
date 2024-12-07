@@ -30,17 +30,7 @@ namespace QTool.View
                 QMessageHelper.Init(QMessageBox.Show);
                 RegisterEvents();
 
-                var result = new LoginResult()
-                {
-                    AccountId = 1,
-                    Shops = new LoginShop[] {
-                        new LoginShop(){ ShopId = 1, Platform = QPlatform.AliExpress, ShopIdentity = "cn1541248712bbac", DisplayName = "店铺A", },
-                        new LoginShop(){ ShopId = 1, Platform = QPlatform.AliExpress, ShopIdentity = "cn1541248712bba2", DisplayName = "店铺B", },
-                    }
-                };
-
                 WinHelper.InitCef();
-                QContext.Current.LoginSuccess(result);
                 var dialog = new MainWindow();
                 dialog.ShowDialog();
             }

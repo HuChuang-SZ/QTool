@@ -15,7 +15,7 @@ namespace QTool.View
     {
         public static QContext Current { get; } = new QContext();
 
-        public QContext()
+        public void StartUnread()
         {
             AsyncHelper.Exec(OnUnread);
         }

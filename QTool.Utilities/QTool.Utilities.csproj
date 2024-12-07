@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net48</TargetFrameworks>
+    <TargetFrameworks>net462</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Deterministic>false</Deterministic>
-	  <Title>QTool</Title>
-	  <Product>QTool</Product>
-	  <Company>互创（深圳）软件有限公司</Company>
-	  <Authors>Huchuang (Shenzhen) Software Co., Ltd.</Authors>
+    <Title>QTool</Title>
+    <Product>QTool</Product>
+    <Company>QTool</Company>
+    <Authors>QTool</Authors>
     <RootNamespace>QTool</RootNamespace>
   </PropertyGroup>
 

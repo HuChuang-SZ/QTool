@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net462</TargetFramework>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Deterministic>false</Deterministic>
     <PlatformTarget>x64</PlatformTarget>
     <ApplicationIcon>Resources\appIcon.ico</ApplicationIcon>
-	  <Title>QTool</Title>
-	  <Product>QTool</Product>
-	  <Company>互创（深圳）软件有限公司</Company>
-	  <Authors>Huchuang (Shenzhen) Software Co., Ltd.</Authors>
+    <Product>QTool</Product>
+    <Company>QTool</Company>
+    <Authors>QTool</Authors>
+    <Title>QTool</Title>
   </PropertyGroup>
   <ItemGroup>
     <Resource Include="Resources\aeIcon.ico" />

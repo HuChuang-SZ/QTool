@@ -41,8 +41,8 @@ namespace QTool.View.Models
         {
             return new ReadOnlyCollection<QModuleGroup>(new QModuleGroup[]
             {
-                new QModuleGroup("客服"
-                    , new QModuleInfo(100, QPlatform.AliExpress, QModule.AeBrowser,"IM工作台","https://csp.aliexpress.com/apps/csp/im#/window")
+                new QModuleGroup("速卖通"
+                    , new QModuleInfo(100, QPlatform.AliExpress, QModule.AeBrowser,"速卖通后台","https://csp.aliexpress.com/")
                 )
             });
         }

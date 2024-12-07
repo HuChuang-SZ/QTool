@@ -17,14 +17,35 @@ namespace QTool.View
     {
         public MainWindow()
         {
+            var result = new LoginResult()
+            {
+                AccountId = 1,
+                Shops = new LoginShop[]
+                              {
+                                new LoginShop(){ ShopId = 1, Platform = QPlatform.AliExpress, ShopIdentity = "cn1541248744bjyk", DisplayName = "店铺1", },
+                                new LoginShop(){ ShopId = 2, Platform = QPlatform.AliExpress, ShopIdentity = "cn1019492009gheae", DisplayName = "店铺2", }
+                              }
+            };
+            QContext.Current.LoginSuccess(result);
+
             DataContext = MainWindowViewModel.Current;
+
             InitializeComponent();
+
+            Loaded += MainWindow_Loaded;
+
             Initialize();
+
             HelpTip.AddSteps(this, new HelpTipStep[] {
                     new HelpTipStep("使用引导","欢迎使用QTool，我们已为你准备了快速引导，只需 1 分钟即可了解新版特性，立即开始吧！"),
                     new HelpTipStep("标签管理","标签管理只要用于标签快速切换，不同店铺不同功能拥有独立选项卡。","eTab"),
                     new HelpTipStep("店铺列表","店铺列表主要用于店铺切换、未读留言数、登录状态等功能。","eShop"),
             }, 1);
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            QContext.Current.StartUnread();
         }
 
         public override bool IsMain => true;
